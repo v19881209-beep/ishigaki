@@ -219,7 +219,7 @@ a{color:var(--fuji)}
     <div class="hero-in">
       <p class="eyebrow">旅のしおり</p>
       <h1>石垣島<small>自由行 5 日</small></h1>
-      <p class="meta">2026.10.20（二）– 10.24（六）・艿婷、彥澂、郁嘉</p>
+      <p class="meta">2026.10.20（二）– 10.24（六）<br>艿婷、彥澂、郁嘉</p>
       <div class="hanko" aria-hidden="true">八重<br>山</div>
     </div>
     <svg class="hero-art" viewBox="0 0 400 110" aria-hidden="true">
@@ -438,7 +438,7 @@ const CHOICE={
   {n:'17:50',e:'🌇',art:'sunset',d:'備用班。在竹富島多待一小時，但晚上的市場時間會變短。',q:'竹富港'}]},
 'd2-7':{q:'晚上去哪個市場？',opts:[
   {n:'小吃街',e:'🏮',art:'market',d:'【新安排】ゆらてぃく市場：在地小吃街，晚餐一起解決。Day 4 還會逛公設市場，這裡不重複。',q:'ゆらてぃく市場'},
-  {n:'公設市場',e:'🛒',art:'market',ph:'market',d:'【原本】Euglena Mall＋公設市場。Day 4 會再來一次，選這個等於逛兩次。',q:'ユーグレナモール 石垣'}]},
+  {n:'公設市場',e:'🛒',art:'market',ph:'market',d:'【原本】Euglena Mall＋公設市場：Day 4 會再來一次，選這個等於逛兩次。',q:'ユーグレナモール 石垣'}]},
 'd4-1':{q:'室內景點選哪個？',opts:[
   {n:'鐘乳洞',e:'🦇',art:'cave',ph:'cave',d:'【新安排】石垣島鐘乳洞：室內，遇雨也可以逛，洞內步行約 30–40 分鐘。',q:'石垣島鍾乳洞'},
   {n:'博物館',e:'🏛️',art:'house',d:'【原本】八重山博物館：室內，在市區，看八重山的歷史和民俗。',q:'石垣市立八重山博物館'}]},
@@ -456,7 +456,8 @@ function pickLabel(k){const c=CHOICE[k],s=choice[k];return s==null?'二選一':'
 function pickDetail(k){
   const s=choice[k];if(s==null)return '<p class="phint">點一下做決定，選中的會放大。</p>';
   const o=CHOICE[k].opts[s], m='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(o.q), p='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(o.q);
-  return `<div class="pdet"><p><b>${o.e} ${o.n}</b>：${o.d}${o.ph?`<br><small class="muted">照片 © ${PH[o.ph][1]}・${PH[o.ph][2]}</small>`:''}</p><div class="acts"><a class="btn" href="${m}" target="_blank" rel="noopener">Google Maps</a><a class="btn" href="${p}" target="_blank" rel="noopener">看實景照片</a><button class="btn ghost" type="button" data-unpick="${k}">重新選</button></div></div>`;
+  const body=/^【.+?】[^：]+：/.test(o.d)?`${o.e} `+o.d.replace(/^【(.+?)】([^：]+)：/,'<span class="tag pick">$1</span> <b>$2</b>：'):`<b>${o.e} ${o.n}</b>：${o.d}`;
+  return `<div class="pdet"><p>${body}${o.ph?`<br><small class="muted">照片 © ${PH[o.ph][1]}・${PH[o.ph][2]}</small>`:''}</p><div class="acts"><a class="btn" href="${m}" target="_blank" rel="noopener">Google Maps</a><a class="btn" href="${p}" target="_blank" rel="noopener">看實景照片</a><button class="btn ghost" type="button" data-unpick="${k}">重新選</button></div></div>`;
 }
 function choiceHTML(k){
   const c=CHOICE[k], s=choice[k];
@@ -476,6 +477,7 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 let done=store.get('ishigaki-done',{}), packed=store.get('ishigaki-pack',{});
 let day=store.get('ishigaki-day',1), tab='plan';
 choice=store.get('ishigaki-choice',{});
+let opened=store.get('ishigaki-open',{});
 const photos={};
 DAYS.forEach(d=>d.items.forEach((_,i)=>{const k=`d${d.id}-${i}`;try{const v=localStorage.getItem('ishigaki-photo-'+k);if(v)photos[k]=v}catch(e){}}));
 // 維基共享資源公開授權照片（已縮小並裁切顯示）
@@ -544,10 +546,10 @@ function renderPlan(){
     return `<li class="stop">
       ${MOVE[k]?`<div class="move">${MOVE[k]}</div>`:''}
       <span class="time">${it[0]}</span>
-      <div class="scard${done[k]?' done':''}">
+      <div class="scard${done[k]?' done':''}${opened[k]?' open':''}" data-card="${k}">
         <div class="srow">
           <label class="chk"><input type="checkbox" id="c-${k}" data-k="${k}" aria-label="完成：${it[1]}" ${done[k]?'checked':''}><span>✓</span></label>
-          <button class="shead" type="button" aria-expanded="false" aria-controls="b-${k}">
+          <button class="shead" type="button" aria-expanded="${!!opened[k]}" aria-controls="b-${k}">
             <span class="emo" aria-hidden="true">${EMO[it[3]]}</span>
             <span class="sname">${TAGS[it[2]]?`<span class="tag ${it[2]}">${TAGS[it[2]]}</span>`:''}${CHOICE[k]?`<span class="tag pick" id="pl-${k}">${pickLabel(k)}</span>`:''}${TAGS[it[2]]||CHOICE[k]?'<br>':''}${it[1]}</span>
             <span class="chev" aria-hidden="true">▼</span>
@@ -586,15 +588,15 @@ function renderWeather(){
     <div class="tmp">${w[3]}°<small>${w[4]}°</small></div></div>`).join('');
   $('pack').innerHTML=PACK.map((p,i)=>`<label><input type="checkbox" id="p-${i}" data-p="${i}" ${packed[i]?'checked':''}>${p}</label>`).join('');
 }
-function setTab(t){
-  tab=t;
+function setTab(t,keepScroll){
+  tab=t;store.set('ishigaki-tab',t);
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
   ['plan','guide','weather'].forEach(x=>$('v-'+x).hidden=x!==t);
-  window.scrollTo({top:0});
+  if(!keepScroll)window.scrollTo({top:0});
 }
 $('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTab(b.dataset.tab)});
 $('days').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;day=+b.dataset.day;store.set('ishigaki-day',day);renderDays();renderPlan()});
-$('list').addEventListener('click',e=>{const h=e.target.closest('.shead');if(!h)return;const c=h.closest('.scard');h.setAttribute('aria-expanded',c.classList.toggle('open'))});
+$('list').addEventListener('click',e=>{const h=e.target.closest('.shead');if(!h)return;const c=h.closest('.scard'),o=c.classList.toggle('open');h.setAttribute('aria-expanded',o);if(o)opened[c.dataset.card]=true;else delete opened[c.dataset.card];store.set('ishigaki-open',opened)});
 $('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.k)return;if(t.checked)done[t.dataset.k]=true;else delete done[t.dataset.k];store.set('ishigaki-done',done);t.closest('.scard').classList.toggle('done',t.checked);progress()});
 $('list').addEventListener('change',e=>{
   const t=e.target, k=t.dataset.photo;
@@ -633,7 +635,9 @@ $('phrases').addEventListener('click',e=>{
   try{navigator.clipboard.writeText(txt).then(ok,fallback)}catch(err){fallback()}
 });
 renderDays();renderPlan();renderGuide();renderWeather();
-const h=location.hash.slice(1);if(['plan','guide','weather'].includes(h))setTab(h);
+const h=location.hash.slice(1), saved=store.get('ishigaki-tab','plan');
+if(['plan','guide','weather'].includes(h))setTab(h);
+else if(['guide','weather'].includes(saved))setTab(saved,true);
 </script>
 
 </html>
