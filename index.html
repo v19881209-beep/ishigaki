@@ -240,6 +240,7 @@ a{color:var(--fuji)}
     <div class="dayhead">
       <h2 id="dtitle"></h2>
       <p class="muted small" id="dsub"></p>
+      <div id="dayplan" hidden></div>
       <div class="prog" aria-hidden="true"><i id="pbar"></i></div>
       <div class="progrow"><span id="ptxt"></span><span>點圓圈打勾・點標題看細節</span></div>
     </div>
@@ -263,7 +264,7 @@ a{color:var(--fuji)}
         <b>離島船班</b>
         <ul class="glist small">
           <li>石垣港離島碼頭出發，旺季提前 30 分鐘到，車停周邊收費停車場。</li>
-          <li>竹富島約 15–20 分；小濱島約 25–30 分。</li>
+          <li>竹富島約 15–20 分；黑島約 25–30 分；西表島大原港約 35–40 分。</li>
           <li>東北季風（ミーニシ）開始吹，浪大會停航。出發當天早上先看運航狀況。</li>
         </ul>
         <div class="links">
@@ -290,7 +291,7 @@ a{color:var(--fuji)}
         <li>紫外線很強，10 月也要防曬、帽子、太陽眼鏡。</li>
         <li>下水穿防滑水鞋，不踩、不摸珊瑚。</li>
         <li>竹富島聚落是住家，小聲走、不進私人院子。</li>
-        <li>小濱島店家少，午餐先確認營業日。</li>
+        <li>黑島、西表島店家少，午餐先確認營業日。</li>
         <li>沖繩開車靠左，石垣市區限速多為 40 km/h。</li>
       </ul>
     </div>
@@ -351,7 +352,7 @@ a{color:var(--fuji)}
 </nav>
 
 <script>
-const EMO={plane:'✈️',car:'🚗',lighthouse:'⚓',noodles:'🍜',dinner:'🍖',beach:'🏖️',boat:'⛴️',buffalo:'🐃',house:'🏠',bike:'🚲',market:'🛒',mountain:'⛰️',sunset:'🌅',cave:'🦇',shop:'🛍️',gadget:'🎧',hotel:'🏨',shisa:'🦁',deck:'🔭',taxi:'🚕',cafe:'☕',izakaya:'🏮',luggage:'🧳',passport:'🛂'};
+const EMO={plane:'✈️',car:'🚗',lighthouse:'⚓',noodles:'🍜',dinner:'🍖',beach:'🏖️',boat:'⛴️',buffalo:'🐃',house:'🏠',bike:'🚲',market:'🛒',mountain:'⛰️',sunset:'🌅',cave:'🦇',shop:'🛍️',gadget:'🎧',hotel:'🏨',shisa:'🦁',deck:'🔭',taxi:'🚕',cafe:'☕',izakaya:'🏮',luggage:'🧳',passport:'🛂',turtle:'🐢'};
 const DAYS=[
 {id:1,date:'10/20',wd:'二',sub:'北部絕景自駕',items:[
  ['08:30','抵達新石垣機場','keep','plane','下機、領行李、辦理入境。','新石垣空港'],
@@ -375,16 +376,33 @@ const DAYS=[
  ['17:30','晚上逛市場：ゆらてぃく／公設市場','swap','market','新安排換成ゆらてぃく市場，取代原本的 Euglena Mall＋公設市場。','ゆらてぃく市場'],
  ['19:30','逛 Don Quijote','add','shop','先買零食、藥妝，Day 4 就不用擠。','ドン・キホーテ 石垣島店']
 ]},
-{id:3,date:'10/22',wd:'四',sub:'小濱島一日遊',items:[
- ['08:20','出發至離島碼頭','keep','car','同樣把車停在離島碼頭周邊。','石垣港離島ターミナル'],
- ['09:15','高速船前往小濱島','keep','boat','航程約 25–30 分鐘。','小浜港'],
- ['09:50','租電動腳踏車／電動機車','keep','bike','島上坡度多，優先選電力輔助車款。','小浜島 レンタサイクル'],
- ['10:20','大岳展望台','keep','mountain','需爬階梯，可眺望八重山群島。','大岳 小浜島'],
- ['11:20','Sugar Road','keep','mountain','甘蔗田道路，適合拍照，注意來車。','シュガーロード 小浜島'],
- ['12:00','小濱島午餐','keep','cafe','島上店家少，先確認營業日或預約。','小浜島 食堂'],
- ['13:20','細崎聚落／海人公園','keep','beach','看西表島與曼塔地標。','細崎 小浜島'],
- ['15:30','回港、還車','keep','boat','搭 17:00 船前要提早還車。17:00 為目前可查的末班參考。','小浜港'],
- ['晚上','雜貨店／小件伴手禮','add','shop','選擇性。不安排新景點，保留體力。','石垣島 雑貨']
+{id:3,date:'10/22',wd:'四',sub:'自由選擇日',plans:[
+ {n:'西表島',e:'🛶',art:'boat',d:'船程最遠（約 40 分），紅樹林遊船＋由布島水牛車渡海。最有冒險感，也最累。',items:[
+  ['08:20','出發至離島碼頭','keep','car','車停離島碼頭周邊收費停車場。','石垣港離島ターミナル'],
+  ['09:00','高速船前往西表島大原港','keep','boat','航程約 35–40 分鐘，是三個方案裡最遠的，容易暈船的人先吃藥。','大原港 西表島'],
+  ['09:45','仲間川紅樹林遊船','keep','boat','沿著河看大片紅樹林，約 1 小時。','仲間川 マングローブクルーズ'],
+  ['11:30','由布島水牛車渡海','keep','buffalo','坐水牛車涉過淺灘到由布島，島上有植物園，午餐在島上吃。Day 2 是在村子裡坐，這次是在海裡走。','由布島'],
+  ['14:00','回大原港','keep','boat','跟團的話巴士會接回港口。','大原港 西表島'],
+  ['15:00','搭船回石垣港','note','boat','回程班次出發前一定要確認。風浪大時，西表島航線最容易停航。','石垣港離島ターミナル'],
+  ['晚上','市區晚餐、早點休息','keep','izakaya','今天移動最多，晚上不排行程。','石垣市 居酒屋']]},
+ {n:'黑島',e:'🐢',art:'turtle',d:'平坦好騎的牧場小島，看海龜、在潮池浮潛。人少、很安靜。',items:[
+  ['08:20','出發至離島碼頭','keep','car','車停離島碼頭周邊收費停車場。','石垣港離島ターミナル'],
+  ['09:00','高速船前往黑島','keep','boat','航程約 25–30 分鐘。','黒島港'],
+  ['09:40','租腳踏車','keep','bike','島很平，一般腳踏車就夠騎。島上牛比人多，路上都是牧場。','黒島 レンタサイクル'],
+  ['10:00','黑島展望台','keep','deck','爬上去看整座島的牧場和海。','黒島展望台'],
+  ['11:00','仲本海岸','keep','beach','退潮時有天然潮池，可以浮潛看魚。下水前先查潮汐時間。','仲本海岸'],
+  ['12:30','午餐','keep','noodles','島上店家少，先確認營業日。','黒島 食事'],
+  ['13:30','黑島研究所','keep','turtle','可以看到海龜，了解八重山的海洋生物。','黒島研究所'],
+  ['15:30','還車、回港','note','boat','黑島班次比竹富島少，回程時刻先確認，不要排太晚。','黒島港'],
+  ['晚上','市區晚餐','keep','izakaya','回市區簡單吃，早點休息。','石垣市 居酒屋']]},
+ {n:'石垣慢遊',e:'🏖️',art:'beach',d:'今天不搭船。睡飽後去海灘玩水、上展望台、回飯店午睡。最輕鬆。',items:[
+  ['09:30','睡飽、慢慢吃早餐','keep','cafe','前兩天都早起，今天不設鬧鐘。','石垣市 カフェ'],
+  ['10:30','底地海灘玩水','keep','beach','在川平灣旁邊，水淺浪小。10 月下旬可能已過海水浴場開放期，下水前先確認。','底地ビーチ'],
+  ['12:30','川平午餐','keep','noodles','川平一帶小店多，順路吃。','川平 ランチ'],
+  ['14:00','バンナ公園展望台','keep','deck','山上的森林公園，展望台可以看市區和海。','バンナ公園'],
+  ['15:30','回飯店休息','keep','hotel','沖個澡、睡個午覺。','ホテルフィットイン石垣島'],
+  ['17:30','市區散步＋雜貨店','add','shop','先逛一點伴手禮，Day 4 會比較輕鬆。','ユーグレナモール'],
+  ['19:00','晚餐','keep','dinner','還沒吃夠石垣牛的話，今晚再吃一次。','石垣牛 焼肉']]}
 ]},
 {id:4,date:'10/23',wd:'五',sub:'市區採買＋還車',items:[
  ['08:30','早餐、退房、整理行李','keep','luggage','行李可留住宿或放車上遮蔽處。','ホテルフィットイン石垣島'],
@@ -406,7 +424,9 @@ const DAYS=[
 ]}];
 const MOVE={'d1-2':'🚗 約 25 分','d1-3':'🚗 約 30 分','d1-4':'🚗 約 20 分','d1-5':'🚗 約 35 分','d1-6':'🚗 約 15 分','d1-7':'🚗 約 40–55 分',
 'd2-1':'🚗 10–20 分（含停車、換票）','d2-2':'⛴️ 約 15–20 分','d2-3':'🚶 約 5 分','d2-4':'🚶 約 5–10 分','d2-5':'🚲 巡島約 2.5 小時','d2-6':'🚲 約 15 分（含還車）','d2-7':'⛴️ 約 15–20 分','d2-8':'🚶 約 5–10 分',
-'d3-1':'🚗 10–20 分（含停車）','d3-2':'⛴️ 約 25–30 分','d3-3':'🛵 約 10 分','d3-4':'🛵 約 5–10 分','d3-5':'🛵 約 5–10 分','d3-6':'🛵 約 15 分','d3-7':'🛵 約 20 分','d3-8':'⛴️ 搭 17:00 船',
+'d3a-1':'🚗 10–20 分（含停車）','d3a-2':'🚌 港口接駁','d3a-3':'🚌 巴士移動','d3a-4':'🚌 巴士移動','d3a-5':'⛴️ 約 35–40 分','d3a-6':'🚗 回市區',
+'d3b-1':'🚗 10–20 分（含停車）','d3b-2':'⛴️ 約 25–30 分','d3b-3':'🚲 約 10 分','d3b-4':'🚲 約 10 分','d3b-5':'🚲 約 10 分','d3b-6':'🚲 約 10 分','d3b-7':'🚲 約 10 分','d3b-8':'⛴️ 約 25–30 分',
+'d3c-1':'🚗 約 30 分','d3c-2':'🚗 約 5 分','d3c-3':'🚗 約 25 分','d3c-4':'🚗 約 15 分','d3c-5':'🚶 步行','d3c-6':'🚶 步行',
 'd4-1':'🚗 約 15–20 分','d4-2':'🚗 約 5 分','d4-3':'🚗 約 15–20 分','d4-4':'🚗 約 5–10 分','d4-5':'🚗 約 5–10 分','d4-6':'🚗 約 20–25 分','d4-7':'🚕 約 25–30 分','d4-8':'🚶 住宿附近',
 'd5-2':'🚕 約 25–30 分'};
 const TAGS={swap:'換',add:'加',note:'提醒'};
@@ -416,8 +436,8 @@ const SUGG={
 'd1-1':['開車前繞車一圈拍照，刮痕、凹痕都留紀錄。','問清楚油種（多半是「レギュラー」）和還車要不要加滿。','導航輸入景點電話號碼或 MAPCODE 最準。'],
 'd1-7':['先確認飯店停車場位置和費用。','晚餐 19:30，放完行李還有時間沖個澡。'],
 'd2-0':['先在碼頭售票口買來回船票，回程班次當場確認。','問問看有沒有含水牛車的套票。'],
-'d3-0':['小濱島航程比竹富島長，容易暈船的人上船前 30 分鐘吃藥。','坐船的中後段比較不晃。'],
-'d3-8':['今天騎車爬坡比較累，挑住宿附近的店就好。','伴手禮重點留到 Day 4 公設市場一次買。'],
+'d3a-0':['船公司有賣「船＋巴士＋遊船＋水牛車」的一日套票，比自己一段段買簡單。','套票通常要預約，出發前幾天先訂。'],
+'d3b-0':['黑島航班比竹富島少，回程時刻先拍照存起來。','島上幾乎沒有遮蔭，帽子和水要帶夠。'],
 'd4-0':['退房前檢查充電線、插頭、浴室小東西。','行李放車上要蓋起來，不要讓外面看到。'],
 'd4-6':['日本加油站多半自助，「満タン」就是加滿。','加油收據留著，還車時可能要看。'],
 'd4-7':['行李多就直接叫計程車回市區，比接駁轉巴士省事。','還車前把車上垃圾、充電線清乾淨。'],
@@ -445,9 +465,6 @@ const CHOICE={
 'd4-2':{q:'下一站去哪裡？',opts:[
   {n:'やいま村',e:'🏠',art:'house',ph:'yaima',d:'【新安排】石垣やいま村：傳統琉球建築體驗園，跟鐘乳洞位置相近。',q:'石垣やいま村'},
   {n:'桃林寺',e:'⛩️',art:'shisa',d:'【原本】桃林寺＋權現堂：在市區，兩個地方相鄰，可以一起看。',q:'桃林寺 石垣'}]},
-'d3-2':{q:'要騎哪一種？',opts:[
-  {n:'腳踏車',e:'🚲',art:'bike',d:'電動輔助腳踏車，安靜好騎，上坡也有助力。',q:'小浜島 レンタサイクル'},
-  {n:'機車',e:'🛵',art:'mountain',d:'電動機車爬坡更輕鬆，移動更快。要帶台灣駕照和日文譯本。',q:'小浜島 レンタバイク'}]},
 'd5-1':{q:'怎麼去機場？',opts:[
   {n:'計程車',e:'🚕',art:'taxi',d:'主方案。前一晚請飯店櫃台預約，三個人分攤不貴。',q:'石垣島 タクシー'},
   {n:'公車',e:'🚌',art:'car',d:'比較便宜，但只有確認清晨班次趕得上才選。',q:'石垣空港 バス'}]}};
@@ -469,7 +486,7 @@ function setPick(k,j){
   $('pd-'+k).innerHTML=pickDetail(k);$('pl-'+k).textContent=pickLabel(k);
 }
 const PHRASES=[['これをください','ko-re-o ku-da-sai','我要這個'],['二人です／三人です','fu-ta-ri / san-nin de-su','兩位／三位'],['おすすめは何ですか？','o-su-su-me wa nan de-su-ka','推薦什麼？'],['お会計お願いします','o-kai-kei o-ne-gai-shi-masu','麻煩結帳'],['免税できますか？','men-zei de-ki-masu-ka','可以免稅嗎？']];
-const WX=[['☀️','晴時多雲','10/20 北部自駕',28,23],['⛅','多雲有陣雨','10/21 竹富島',28,23],['🌤️','晴時多雲','10/22 小濱島',27,23],['🌦️','午後陣雨','10/23 市區（有室內備案）',27,22],['☁️','多雲','10/24 返程',27,22]];
+const WX=[['☀️','晴時多雲','10/20 北部自駕',28,23],['⛅','多雲有陣雨','10/21 竹富島',28,23],['🌤️','晴時多雲','10/22 自由選擇日',27,23],['🌦️','午後陣雨','10/23 市區（有室內備案）',27,22],['☁️','多雲','10/24 返程',27,22]];
 const PACK=['防曬乳（SPF50）','帽子、太陽眼鏡','輕便雨衣／折傘','薄外套（船上、晚上）','防滑水鞋','暈船藥','行動電源（隨身）','防水手機袋'];
 
 const $=id=>document.getElementById(id);
@@ -478,8 +495,11 @@ let done=store.get('ishigaki-done',{}), packed=store.get('ishigaki-pack',{});
 let day=store.get('ishigaki-day',1), tab='plan';
 choice=store.get('ishigaki-choice',{});
 let opened=store.get('ishigaki-open',{});
+const ABC='abc';
+function itemsOf(d){if(!d.plans)return d.items;const s=choice['day'+d.id];return s==null?[]:d.plans[s].items}
+function kp(d){return d.plans?`d${d.id}${ABC[choice['day'+d.id]]}`:`d${d.id}`}
 const photos={};
-DAYS.forEach(d=>d.items.forEach((_,i)=>{const k=`d${d.id}-${i}`;try{const v=localStorage.getItem('ishigaki-photo-'+k);if(v)photos[k]=v}catch(e){}}));
+DAYS.forEach(d=>(d.plans?d.plans.map((p,j)=>[p.items,`d${d.id}${'abc'[j]}`]):[[d.items,`d${d.id}`]]).forEach(([its,pre])=>its.forEach((_,i)=>{const k=`${pre}-${i}`;try{const v=localStorage.getItem('ishigaki-photo-'+k);if(v)photos[k]=v}catch(e){}})));
 // 維基共享資源公開授權照片（已縮小並裁切顯示）
 const LIC={'CC BY 2.0':'by/2.0','CC BY 2.5':'by/2.5','CC BY 4.0':'by/4.0','CC BY-SA 2.0':'by-sa/2.0','CC BY-SA 2.1 JP':'by-sa/2.1/jp','CC BY-SA 3.0':'by-sa/3.0','CC BY-SA 4.0':'by-sa/4.0'};
 const PH={
@@ -490,12 +510,11 @@ nagura:['名藏灣的日落','石垣市','CC BY 4.0','Okinawa_Nagura_Bay.jpg'],
 buffalo:['竹富島水牛車','Ken FUNAKOSHI','CC BY-SA 2.0','Water_buffalo_taxi.jpg'],
 village:['竹富島紅瓦聚落','Minamie\'s Photo','CC BY 2.0','Taketomi,_Japan_(2310448093).jpg'],
 kaiji:['往 Kaiji 海灘的小路','kanegen','CC BY 2.0','Kaiji_beach(Taketomi).jpg'],
-ufudaki:['小濱島大岳','Torbenbrinker','CC BY-SA 3.0','KohamaMountain.jpg'],
 cave:['石垣島鐘乳洞','Raita Futo','CC BY 2.0','Ishigaki_Stalactite_Cave_(52117117523).jpg'],
 yaima:['石垣やいま村 舊牧志家','Paipateroma','CC BY-SA 4.0','Ishigaki_yaimamura_makishi_house.jpg'],
 market:['石垣市公設市場','Paipateroma','CC BY-SA 3.0','Ishigaki_kosetsu_ichiba.jpg'],
 soba:['八重山麵','Muyo','CC BY-SA 4.0','Yaeyama_soba02.jpg']};
-const PHOTO_AT={'d1-2':'tamatori','d1-3':'hirakubo','d1-5':'kabira','d2-2':'buffalo','d2-3':'village','d2-4':'soba','d2-5':'kaiji','d3-3':'ufudaki','d4-1':'cave','d4-2':'yaima','d4-3':'soba','d4-4':'market'};
+const PHOTO_AT={'d1-2':'tamatori','d1-3':'hirakubo','d1-5':'kabira','d2-2':'buffalo','d2-3':'village','d2-4':'soba','d2-5':'kaiji','d4-1':'cave','d4-2':'yaima','d4-3':'soba','d4-4':'market'};
 const phImg=id=>`<img src="img/${id}.jpg" alt="${PH[id][0]}" loading="lazy">`;
 function artHTML(k,type){
   if(photos[k])return `<img alt="我拍的照片" src="${photos[k]}"><span class="badge">我的照片</span>`;
@@ -507,6 +526,7 @@ const S=(inner,bg)=>`<svg viewBox="0 0 160 90" aria-hidden="true" preserveAspect
 const sea='<rect y="58" width="160" height="32" fill="#1f93b5"/><path d="M0 66q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0" stroke="#bfeaf5" fill="none" stroke-width="1.5"/>';
 const cloud=(x,y)=>`<ellipse cx="${x}" cy="${y}" rx="14" ry="5" fill="#fff"/><ellipse cx="${x+8}" cy="${y-3}" rx="9" ry="5" fill="#fff"/>`;
 const ART={
+turtle:()=>S('<circle cx="128" cy="18" r="8" fill="#fde68a"/><rect width="160" height="90" y="34" fill="#2aa7c9"/><path d="M0 44q10-4 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0" stroke="#bfeaf5" fill="none" stroke-width="1.5"/><ellipse cx="52" cy="52" rx="12" ry="6" fill="#5fa85f" transform="rotate(-30 52 52)"/><ellipse cx="108" cy="52" rx="12" ry="6" fill="#5fa85f" transform="rotate(30 108 52)"/><ellipse cx="56" cy="76" rx="10" ry="5" fill="#5fa85f" transform="rotate(30 56 76)"/><ellipse cx="104" cy="76" rx="10" ry="5" fill="#5fa85f" transform="rotate(-30 104 76)"/><circle cx="80" cy="36" r="9" fill="#6fbf6a"/><circle cx="76" cy="34" r="1.6" fill="#1f2937"/><circle cx="84" cy="34" r="1.6" fill="#1f2937"/><ellipse cx="80" cy="64" rx="26" ry="22" fill="#3f8f4a"/><path d="M80 44v40M60 58h40M62 72h36" stroke="#6fbf6a" stroke-width="3"/>','#b9e3f3'),
 plane:()=>S(cloud(30,22)+cloud(120,60)+'<g transform="rotate(-12 80 45)"><rect x="40" y="39" width="82" height="13" rx="6.5" fill="#fff"/><path d="M72 46L56 72h11l24-26z" fill="#d7dee5"/><path d="M72 46L56 20h11l24 26z" fill="#d7dee5"/><path d="M45 41l-8-13h8l9 13z" fill="#E58FA5"/><circle cx="112" cy="45" r="2.2" fill="#2F5D8C"/><circle cx="104" cy="45" r="2.2" fill="#2F5D8C"/></g>','#a9dcf0'),
 car:()=>S(cloud(36,20)+cloud(124,28)+'<rect y="62" width="160" height="28" fill="#4b5563"/><path d="M0 76h160" stroke="#fff" stroke-dasharray="10 8" stroke-width="2"/><rect x="42" y="44" width="76" height="22" rx="7" fill="#4fa3d1"/><path d="M58 44l8-14h30l10 14z" fill="#7cc0e6"/><path d="M69 42l5-9h10v9zM88 42v-9h8l5 9z" fill="#e8f6fc"/><circle cx="62" cy="67" r="8" fill="#1f2937"/><circle cx="100" cy="67" r="8" fill="#1f2937"/><circle cx="62" cy="67" r="3" fill="#9ca3af"/><circle cx="100" cy="67" r="3" fill="#9ca3af"/>','#bfe6f4'),
 lighthouse:()=>S('<circle cx="130" cy="20" r="9" fill="#fde68a"/>'+sea+'<ellipse cx="80" cy="76" rx="52" ry="12" fill="#5fa85f"/><path d="M71 72L76 32h8l5 40z" fill="#fff"/><path d="M73.4 56h13.2l.8 8H72.6z" fill="#d9362b"/><rect x="73" y="26" width="14" height="6" fill="#374151"/><path d="M72 26l8-9 8 9z" fill="#d9362b"/><rect x="77" y="38" width="6" height="8" rx="3" fill="#7cc0e6"/>','#b9e3f3'),
@@ -536,12 +556,31 @@ passport:()=>S('<rect x="96" y="22" width="44" height="54" rx="4" fill="#f4f1e4"
 function renderDays(){
   $('days').innerHTML=DAYS.map(d=>`<button role="tab" data-day="${d.id}" aria-selected="${d.id===day}"><b>Day ${d.id}</b><small>${d.date}</small></button>`).join('');
 }
-function renderPlan(){
+function dayPlanDetail(d){
+  const s=choice['day'+d.id];
+  if(s==null)return '<p class="phint">小濱島取消了，改成三選一。點一個方案，下面就會出現那天的行程。</p>';
+  const o=d.plans[s];
+  return `<div class="pdet"><p><b>${o.e} ${o.n}</b>：${o.d}</p><div class="acts"><button class="btn ghost" type="button" data-unplan="${d.id}">重新選</button></div></div>`;
+}
+function dayPlanHTML(d){
+  const s=choice['day'+d.id];
+  return `<div class="pick"><p class="pq">今天要去哪裡？</p><div class="tiles">${d.plans.map((o,j)=>`<button type="button" class="tile${s===j?' on':''}${s!=null&&s!==j?' off':''}" data-plan="${d.id}" data-j="${j}" aria-pressed="${s===j}"><span class="tart">${ART[o.art]()}</span><span class="tlab"><span class="te" aria-hidden="true">${o.e}</span>${o.n}</span></button>`).join('')}</div><div id="dpd">${dayPlanDetail(d)}</div></div>`;
+}
+function setPlan(id,j){
+  const d=DAYS.find(x=>x.id===id);
+  if(j==null)delete choice['day'+id];else choice['day'+id]=j;store.set('ishigaki-choice',choice);
+  document.querySelectorAll(`[data-plan="${id}"]`).forEach(t=>{const n=+t.dataset.j;t.classList.toggle('on',j===n);t.classList.toggle('off',j!=null&&j!==n);t.setAttribute('aria-pressed',j===n)});
+  $('dpd').innerHTML=dayPlanDetail(d);renderPlan(false);
+}
+function renderPlan(full){
   const d=DAYS.find(x=>x.id===day)||DAYS[0];
-  $('dtitle').textContent=`Day ${d.id}・${d.sub}`;
+  const sel=d.plans?choice['day'+d.id]:null;
+  $('dtitle').textContent=`Day ${d.id}・${sel!=null?d.plans[sel].n:d.sub}`;
   $('dsub').textContent=`${d.date}（${d.wd}）・日落約 18:10`;
-  $('list').innerHTML=d.items.map((it,i)=>{
-    const k=`d${d.id}-${i}`, map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(it[5]);
+  if(full!==false){$('dayplan').hidden=!d.plans;$('dayplan').innerHTML=d.plans?dayPlanHTML(d):''}
+  const pre=kp(d);
+  $('list').innerHTML=itemsOf(d).map((it,i)=>{
+    const k=`${pre}-${i}`, map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(it[5]);
     const pics='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(it[5]);
     return `<li class="stop">
       ${MOVE[k]?`<div class="move">${MOVE[k]}</div>`:''}
@@ -572,9 +611,10 @@ function renderPlan(){
 }
 function progress(){
   const d=DAYS.find(x=>x.id===day)||DAYS[0];
-  const n=d.items.filter((_,i)=>done[`d${d.id}-${i}`]).length;
-  $('pbar').style.width=(n/d.items.length*100)+'%';
-  $('ptxt').textContent=`已完成 ${n} / ${d.items.length}`;
+  const its=itemsOf(d), pre=kp(d);
+  const n=its.filter((_,i)=>done[`${pre}-${i}`]).length;
+  $('pbar').style.width=(its.length?n/its.length*100:0)+'%';
+  $('ptxt').textContent=its.length?`已完成 ${n} / ${its.length}`:'還沒選方案';
 }
 function renderGuide(){
   $('credits').innerHTML=Object.values(PH).map(p=>`<li>${p[0]}：<a href="https://commons.wikimedia.org/wiki/File:${encodeURI(p[3])}" target="_blank" rel="noopener">${p[1]}</a>，<a href="https://creativecommons.org/licenses/${LIC[p[2]]}/" target="_blank" rel="noopener">${p[2]}</a></li>`).join('');
@@ -622,9 +662,10 @@ $('list').addEventListener('click',e=>{
 $('list').addEventListener('click',e=>{
   const b=e.target.closest('[data-rm]');if(!b)return;const k=b.dataset.rm;
   delete photos[k];try{localStorage.removeItem('ishigaki-photo-'+k)}catch(err){}
-  const d=DAYS.find(x=>x.id===day), it=d.items[+k.split('-')[1]];
+  const d=DAYS.find(x=>x.id===day), it=itemsOf(d)[+k.split('-')[1]];
   $('art-'+k).innerHTML=artHTML(k,it[3]);b.hidden=true;$('m-'+k).hidden=true;
 });
+$('dayplan').addEventListener('click',e=>{const t=e.target.closest('[data-plan]');if(t){setPlan(+t.dataset.plan,+t.dataset.j);return}const u=e.target.closest('[data-unplan]');if(u)setPlan(+u.dataset.unplan,null)});
 $('reset').addEventListener('click',()=>{done={};store.set('ishigaki-done',done);renderPlan()});
 $('pack').addEventListener('change',e=>{const t=e.target;if(t.dataset.p==null)return;if(t.checked)packed[t.dataset.p]=true;else delete packed[t.dataset.p];store.set('ishigaki-pack',packed)});
 $('phrases').addEventListener('click',e=>{
