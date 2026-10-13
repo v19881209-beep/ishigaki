@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>石垣島 旅のしおり</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* 版面：單欄 640px 手機優先，雪白底＋青海波紋，日式圓角卡片，底部浮動膠囊導覽 */
+:root{
+  --fuji:#2F5D8C;      /* 富士藍：主色、標題、選取狀態 */
+  --fuji-deep:#1E3F63; /* 深富士藍：大標、強調字 */
+  --fuji-soft:#DCE8F4; /* 淡藍：標籤底、進度條底 */
+  --snow:#F7FAFD;      /* 雪白：頁面底 */
+  --card:#FFFFFF;
+  --ink:#1F2A37;
+  --muted:#5B6B7D;
+  --line:#D6E1EC;
+  --wave:#E6EEF7;      /* 青海波紋線 */
+  --sakura:#E58FA5;    /* 點綴：可愛小圓點 */
+  --sakura-soft:#FBE7EC;
+  --done:#2E7D5B; --done-soft:#DDF1E7;
+  --swap:#B4541F; --swap-soft:#FCE7DA;
+  --note:#8A6A00; --note-soft:#FAF0C8;
+  --shadow:0 6px 18px rgba(30,63,99,.10);
+  --f-display:"Zen Maru Gothic","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --fuji:#8DB6E2; --fuji-deep:#C9DDF3; --fuji-soft:#1F3550; --snow:#0F1722; --card:#172334;
+    --ink:#E6EDF5; --muted:#9FB0C3; --line:#2A3C52; --wave:#16212F; --sakura:#F2A7BA; --sakura-soft:#3A2330;
+    --done:#7FD3AC; --done-soft:#173A2C; --swap:#F5B48A; --swap-soft:#3D2616; --note:#F0D77A; --note-soft:#3A3214;
+    --shadow:0 6px 18px rgba(0,0,0,.35); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --fuji:#8DB6E2; --fuji-deep:#C9DDF3; --fuji-soft:#1F3550; --snow:#0F1722; --card:#172334;
+  --ink:#E6EDF5; --muted:#9FB0C3; --line:#2A3C52; --wave:#16212F; --sakura:#F2A7BA; --sakura-soft:#3A2330;
+  --done:#7FD3AC; --done-soft:#173A2C; --swap:#F5B48A; --swap-soft:#3D2616; --note:#F0D77A; --note-soft:#3A3214;
+  --shadow:0 6px 18px rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{
+  margin:0;color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;
+  background-color:var(--snow);
+  background-image:
+    radial-gradient(circle at 50% 100%, transparent 14px, var(--wave) 15px, var(--wave) 17px, transparent 18px),
+    radial-gradient(circle at 50% 100%, transparent 24px, var(--wave) 25px, var(--wave) 27px, transparent 28px);
+  background-size:64px 32px;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--fuji)}
+:focus-visible{outline:3px solid var(--fuji);outline-offset:2px;border-radius:10px}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:0 140px}
+
+/* ── 頁首 ── */
+.hero{position:relative;margin-inline:-16px;padding:22px 20px 0;background:linear-gradient(180deg,var(--fuji) 0%,var(--fuji) 70%,transparent 70%);color:#fff;overflow:hidden}
+.hero-in{position:relative;z-index:1}
+.eyebrow{font-family:var(--f-display);font-size:14px;letter-spacing:.2em;opacity:.85;margin:0}
+.hero h1{font-family:var(--f-display);font-weight:900;font-size:34px;line-height:1.2;margin:2px 0 4px;letter-spacing:.04em;text-wrap:balance}
+.hero h1 small{display:block;font-size:17px;font-weight:700;letter-spacing:.12em;opacity:.9}
+.hero .meta{margin:0;font-size:15px;opacity:.92}
+.hero-art{display:block;width:100%;height:auto;margin-top:6px;max-width:100%}
+.hanko{position:absolute;right:20px;top:20px;width:56px;height:56px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:15px;line-height:1.1;text-align:center;transform:rotate(-8deg);opacity:.95}
+
+/* ── 共用 ── */
+.sec-title{font-family:var(--f-display);font-weight:900;font-size:22px;color:var(--fuji-deep);margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--sakura);box-shadow:14px 0 0 var(--fuji-soft)}
+.sec-title span{margin-left:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px 18px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+[hidden]{display:none!important}
+
+/* ── 天數切換 ── */
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+.days button{min-height:64px;border:1.5px solid var(--line);background:var(--card);border-radius:18px;padding:6px 2px;line-height:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.days b{font-family:var(--f-display);font-size:16px}
+.days small{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.days button[aria-selected="true"]{background:var(--fuji);border-color:var(--fuji);color:#fff}
+:root[data-theme="dark"] .days button[aria-selected="true"]{color:var(--snow)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .days button[aria-selected="true"]{color:var(--snow)}}
+.days button[aria-selected="true"] small{color:inherit;opacity:.85}
+
+.dayhead{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.dayhead h2{font-family:var(--f-display);font-weight:900;font-size:24px;margin:0;color:var(--fuji-deep);line-height:1.3}
+.dayhead p{margin:0}
+.prog{height:10px;background:var(--fuji-soft);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--done);border-radius:999px;transition:width .3s}
+.progrow{display:flex;justify-content:space-between;font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ── 行程時間軸 ── */
+.timeline{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:0}
+.stop{position:relative;padding-left:66px;padding-bottom:14px}
+.stop::before{content:"";position:absolute;left:29px;top:8px;bottom:-8px;width:2px;background:repeating-linear-gradient(var(--line) 0 6px,transparent 6px 11px)}
+.stop:last-child::before{display:none}
+.time{position:absolute;left:0;top:14px;width:58px;text-align:center;font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--fuji);font-variant-numeric:tabular-nums;background:var(--snow);border-radius:999px;line-height:1.4}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.srow{display:flex;align-items:center;gap:4px;padding:6px 6px 6px 4px}
+.chk{flex:none;width:48px;height:48px;display:grid;place-items:center;position:relative}
+.chk input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.chk span{width:28px;height:28px;border-radius:50%;border:2px solid var(--fuji);display:grid;place-items:center;color:transparent;font-weight:700;font-size:15px;transition:background .2s}
+.chk input:checked+span{background:var(--done);border-color:var(--done);color:#fff}
+.chk input:focus-visible+span{outline:3px solid var(--fuji);outline-offset:2px}
+.shead{flex:1;min-width:0;min-height:48px;background:none;border:0;text-align:left;padding:4px 4px;display:flex;align-items:center;gap:10px}
+.emo{flex:none;width:40px;height:40px;border-radius:14px;background:var(--fuji-soft);display:grid;place-items:center;font-size:22px}
+.sname{flex:1;min-width:0;font-weight:700;line-height:1.4}
+.chev{flex:none;color:var(--muted);transition:transform .2s;font-size:14px}
+.scard.open .chev{transform:rotate(180deg)}
+.scard.done .sname{text-decoration:line-through;color:var(--muted)}
+.scard.done .emo{opacity:.5}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:0 9px;border-radius:999px;margin:0 0 2px;line-height:1.7}
+.tag.swap{background:var(--swap-soft);color:var(--swap)}
+.tag.add{background:var(--done-soft);color:var(--done)}
+.tag.note{background:var(--note-soft);color:var(--note)}
+.sbody{display:none;padding:0 16px 16px;border-top:1px dashed var(--line)}
+.scard.open .sbody{display:block}
+.sbody p{margin:12px 0}
+.move{font-size:14px;color:var(--muted);margin:-6px 0 10px 4px}
+.art{position:relative;margin-top:14px;aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;background:var(--fuji-soft)}
+.art svg,.art img{display:block;width:100%;height:100%;object-fit:cover}
+.art .badge{position:absolute;left:10px;bottom:10px;font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.88);color:#1E3F63}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.acts input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.acts label.btn:focus-within{outline:3px solid var(--fuji);outline-offset:2px}
+.btn.ghost{border-color:var(--line);color:var(--muted);font-weight:500}
+.tag.pick{background:var(--sakura-soft);color:var(--fuji-deep);margin-left:4px}
+.sugg{margin-top:14px;background:var(--fuji-soft);border-radius:18px;padding:12px 14px}
+.sugg b{font-family:var(--f-display);color:var(--fuji-deep)}
+.sugg ul{margin:4px 0 0;padding-left:1.2em;font-size:16px}
+.sugg li+li{margin-top:4px}
+.pick{margin-top:14px}
+.pq{font-weight:700;margin:0 0 8px;color:var(--fuji-deep)}
+.tiles{display:flex;gap:8px;height:136px}
+.tile{position:relative;flex:1 1 0;min-width:0;border:2px solid var(--line);border-radius:18px;overflow:hidden;background:var(--fuji-soft);padding:0;transition:flex-grow .5s cubic-bezier(.3,1.35,.5,1),opacity .3s,border-color .3s,transform .15s}
+.tile.on{flex-grow:3;border-color:var(--fuji)}
+.tile.off{opacity:.55}
+.tile:active{transform:scale(.95)}
+.tart{position:absolute;inset:0}
+.tart svg,.tart img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.tile.on .tart svg,.tile.on .tart img{transform:scale(1.18)}
+.credit{position:absolute;right:8px;bottom:8px;max-width:calc(100% - 16px);font-size:11px;line-height:1.5;padding:1px 8px;border-radius:999px;background:rgba(0,0,0,.5);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.credits{font-size:14px;color:var(--muted);margin:0;padding-left:1.2em}
+.credits li+li{margin-top:4px}
+.credits a{word-break:break-all}
+.tlab{position:absolute;left:6px;right:6px;bottom:6px;background:rgba(255,255,255,.92);color:#1E3F63;border-radius:12px;padding:2px 6px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;overflow:hidden}
+.te{font-size:18px}
+.tile.off .te{display:none}
+.tile.on .tlab{font-size:17px}
+.pdet{margin-top:10px;background:var(--sakura-soft);border-radius:16px;padding:12px 14px;animation:pop .35s ease}
+.pdet p{margin:0 0 10px}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.phint{font-size:14px;color:var(--muted);margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){.pdet{animation:none}.tile.on .tart svg{transform:none}}
+.pmsg{font-size:14px;color:var(--note);margin:8px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--fuji);color:var(--fuji);background:transparent;text-decoration:none;font-weight:700;font-size:15px}
+.btn.solid{background:var(--fuji);color:var(--snow)}
+.reset{margin-top:8px;background:none;border:0;color:var(--muted);text-decoration:underline;min-height:44px;font-size:15px}
+
+/* ── 指南 ── */
+.glist{margin:0;padding-left:1.2em}
+.glist li+li{margin-top:6px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
+.kv dt{color:var(--muted);font-size:15px;padding-top:1px}
+.kv dd{margin:0;min-width:0}
+.phrases{display:flex;flex-direction:column;gap:8px}
+.phrase{display:flex;align-items:center;gap:10px;background:var(--snow);border-radius:16px;padding:10px 12px}
+.phrase .jp{font-family:var(--f-display);font-weight:700;font-size:19px;color:var(--fuji-deep);display:block}
+.phrase .rd{font-size:14px;color:var(--muted);display:block}
+.phrase div{flex:1;min-width:0}
+.copy{flex:none;min-width:44px;min-height:44px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sos div{background:var(--sakura-soft);border-radius:18px;padding:12px;text-align:center}
+.sos b{display:block;font-family:var(--f-display);font-size:30px;color:var(--fuji-deep);line-height:1.2;user-select:all}
+
+/* ── 天氣 ── */
+.wx-now{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.wx-now div{background:var(--snow);border-radius:18px;padding:12px 4px}
+.wx-now b{display:block;font-family:var(--f-display);font-size:26px;color:var(--fuji-deep);font-variant-numeric:tabular-nums;line-height:1.3}
+.wx-now span{font-size:14px;color:var(--muted)}
+.wxdays{display:flex;flex-direction:column;gap:10px}
+.wxday{display:flex;align-items:center;gap:12px}
+.wxday .ic{flex:none;width:52px;height:52px;border-radius:18px;background:var(--fuji-soft);display:grid;place-items:center;font-size:26px}
+.wxday .tx{flex:1;min-width:0}
+.wxday .tx b{font-family:var(--f-display)}
+.wxday .tmp{flex:none;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--fuji-deep)}
+.wxday .tmp small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.bar-t{position:relative;height:8px;border-radius:999px;background:var(--fuji-soft);margin-top:6px}
+.bar-t i{position:absolute;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--fuji),var(--sakura))}
+.pill{display:inline-block;font-size:13px;font-weight:700;padding:1px 10px;border-radius:999px;background:var(--note-soft);color:var(--note)}
+.pack{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.pack label{display:flex;align-items:center;gap:8px;min-height:48px;background:var(--snow);border-radius:16px;padding:6px 12px;cursor:pointer;font-size:16px}
+.pack input{width:22px;height:22px;accent-color:var(--fuji);flex:none}
+
+/* ── 底部浮動導覽 ── */
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:10;width:min(400px,calc(100% - 32px));display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 30px rgba(30,63,99,.22)}
+.nav button{min-height:56px;border:0;background:transparent;border-radius:999px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--muted);line-height:1.2}
+.nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav button[aria-selected="true"]{background:var(--fuji);color:var(--snow)}
+
+.foot{font-size:14px;color:var(--muted);margin-top:18px}
+@media (max-width:470px){
+  .hero h1{font-size:30px}
+  .days small{font-size:12px}
+  .pack{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-in">
+      <p class="eyebrow">旅のしおり</p>
+      <h1>石垣島<small>自由行 5 日</small></h1>
+      <p class="meta">2026.10.20（二）– 10.24（六）・艿婷、彥澂、郁嘉</p>
+      <div class="hanko" aria-hidden="true">八重<br>山</div>
+    </div>
+    <svg class="hero-art" viewBox="0 0 400 110" aria-hidden="true">
+      <circle cx="330" cy="24" r="16" fill="#FFE7A3"/>
+      <ellipse cx="84" cy="22" rx="22" ry="8" fill="#fff" opacity=".9"/><ellipse cx="98" cy="17" rx="14" ry="8" fill="#fff" opacity=".9"/>
+      <path d="M150 72 Q200 30 250 72Z" fill="#7FB98A"/>
+      <path d="M232 72 Q270 44 312 72Z" fill="#96C99E"/>
+      <path d="M0 70 Q25 60 50 70 T100 70 T150 70 T200 70 T250 70 T300 70 T350 70 T400 70 V110 H0Z" fill="#9CC6EA"/>
+      <path d="M0 84 Q25 74 50 84 T100 84 T150 84 T200 84 T250 84 T300 84 T350 84 T400 84 V110 H0Z" fill="#CFE3F5"/>
+      <g transform="translate(60 76)"><path d="M0 0h34l-5 9H5z" fill="#fff"/><path d="M8 0V-12h14l4 12z" fill="#E58FA5"/></g>
+      <circle cx="356" cy="96" r="4" fill="#E58FA5"/><circle cx="370" cy="92" r="3" fill="#fff"/>
+    </svg>
+  </header>
+
+  <!-- 行程 -->
+  <section id="v-plan" role="tabpanel" aria-label="行程">
+    <div class="days" role="tablist" id="days"></div>
+    <div class="dayhead">
+      <h2 id="dtitle"></h2>
+      <p class="muted small" id="dsub"></p>
+      <div class="prog" aria-hidden="true"><i id="pbar"></i></div>
+      <div class="progrow"><span id="ptxt"></span><span>點圓圈打勾・點標題看細節</span></div>
+    </div>
+    <ol class="timeline" id="list"></ol>
+    <button class="reset" id="reset" type="button">清除這趟的打勾紀錄</button>
+  </section>
+
+  <!-- 指南 -->
+  <section id="v-guide" role="tabpanel" aria-label="指南" hidden>
+    <h2 class="sec-title"><span>交通</span></h2>
+    <div class="stack">
+      <div class="card">
+        <dl class="kv">
+          <dt>去程</dt><dd>10/20 08:30 抵達新石垣機場</dd>
+          <dt>回程</dt><dd>10/24 虎航 IT 737，以機票時間為準</dd>
+          <dt>租車</dt><dd>日產租車 石垣島機場店・預約號碼 <b>247213697</b>・10/23 17:15 前還車</dd>
+          <dt>住宿</dt><dd>Hotel Fit In 石垣島（市區）</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <b>離島船班</b>
+        <ul class="glist small">
+          <li>石垣港離島碼頭出發，旺季提前 30 分鐘到，車停周邊收費停車場。</li>
+          <li>竹富島約 15–20 分；小濱島約 25–30 分。</li>
+          <li>東北季風（ミーニシ）開始吹，浪大會停航。出發當天早上先看運航狀況。</li>
+        </ul>
+        <div class="links">
+          <a class="btn" href="https://www.yaeyama.co.jp/" target="_blank" rel="noopener">八重山觀光渡輪</a>
+          <a class="btn" href="https://aneikankou.co.jp/" target="_blank" rel="noopener">安榮觀光</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec-title"><span>購物須知（沒托運）</span></h2>
+    <div class="card">
+      <ul class="glist">
+        <li>退稅：單筆滿 ¥5,000（未稅）可辦免稅，帶護照。</li>
+        <li>手提行李重量與尺寸，看虎航訂位說明。</li>
+        <li>行動電源、無線離子夾一律隨身，安檢時關機。</li>
+        <li>優先買：黑糖、ちんすこう、ミンサー織小物、乾貨點心。</li>
+        <li>避開：大瓶液體（100ml 限制）、易碎玻璃大件。</li>
+      </ul>
+    </div>
+
+    <h2 class="sec-title"><span>島上小提醒</span></h2>
+    <div class="card">
+      <ul class="glist">
+        <li>紫外線很強，10 月也要防曬、帽子、太陽眼鏡。</li>
+        <li>下水穿防滑水鞋，不踩、不摸珊瑚。</li>
+        <li>竹富島聚落是住家，小聲走、不進私人院子。</li>
+        <li>小濱島店家少，午餐先確認營業日。</li>
+        <li>沖繩開車靠左，石垣市區限速多為 40 km/h。</li>
+      </ul>
+    </div>
+
+    <h2 class="sec-title"><span>點餐用日文</span></h2>
+    <div class="card phrases" id="phrases"></div>
+
+    <h2 class="sec-title"><span>緊急電話</span></h2>
+    <div class="sos">
+      <div><b>110</b>警察</div>
+      <div><b>119</b>救護・消防</div>
+    </div>
+    <p class="foot">營業時間、價格、退稅與船班可能變動，出發前請用 Google Maps 與官方網站確認。</p>
+
+    <h2 class="sec-title"><span>照片出處</span></h2>
+    <div class="card">
+      <p class="small muted" style="margin:0 0 8px">實景照片來自維基共享資源，依各自的創用 CC 授權使用，顯示時已縮小並裁切。沒有照片的景點用示意插畫。</p>
+      <ul class="credits" id="credits"></ul>
+    </div>
+  </section>
+
+  <!-- 天氣 -->
+  <section id="v-weather" role="tabpanel" aria-label="天氣" hidden>
+    <h2 class="sec-title"><span>10 月下旬的石垣島</span></h2>
+    <div class="card">
+      <div class="wx-now">
+        <div><b>28°</b><span>白天高溫</span></div>
+        <div><b>23°</b><span>早晚低溫</span></div>
+        <div><b>26°</b><span>海水溫度</span></div>
+      </div>
+      <p class="small" style="margin:12px 0 0">夏天的尾巴。白天穿短袖，東北季風開始吹，傍晚海邊和船上會涼，帶一件薄外套。陣雨來得快、停得也快。</p>
+    </div>
+
+    <h2 class="sec-title"><span>每日預估</span></h2>
+    <div class="card">
+      <div class="wxdays" id="wxdays"></div>
+      <p class="foot" style="margin-top:14px"><span class="pill">平年參考</span> 以上是 10 月下旬的氣候平均，不是實際預報。出發前一週請點下方按鈕看日本氣象廳正式預報。</p>
+      <div class="links">
+        <a class="btn solid" href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&amp;area_code=474000" target="_blank" rel="noopener">氣象廳・八重山預報</a>
+        <a class="btn" href="https://www.jma.go.jp/bosai/map.html#contents=typhoon" target="_blank" rel="noopener">颱風動態</a>
+      </div>
+    </div>
+
+    <h2 class="sec-title"><span>依天氣帶的東西</span></h2>
+    <div class="card">
+      <div class="pack" id="pack"></div>
+    </div>
+  </section>
+</div>
+
+<nav class="nav" role="tablist" aria-label="主選單" id="nav">
+  <button role="tab" data-tab="plan" aria-selected="true" aria-controls="v-plan">
+    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="17" rx="3"/><path d="M8 2v4M16 2v4M4 10h16M8 14h4"/></svg>行程</button>
+  <button role="tab" data-tab="guide" aria-selected="false" aria-controls="v-guide">
+    <svg viewBox="0 0 24 24"><path d="M4 5c3-1.5 5-1.5 8 0v15c-3-1.5-5-1.5-8 0zM12 5c3-1.5 5-1.5 8 0v15c-3-1.5-5-1.5-8 0z"/></svg>指南</button>
+  <button role="tab" data-tab="weather" aria-selected="false" aria-controls="v-weather">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.5"/><path d="M9 2v1.5M2 9h1.5M4 4l1 1M14 4l-1 1"/><path d="M8 19h10a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.6 1.5A2.8 2.8 0 0 0 8 19z"/></svg>天氣</button>
+</nav>
+
+<script>
+const EMO={plane:'✈️',car:'🚗',lighthouse:'⚓',noodles:'🍜',dinner:'🍖',beach:'🏖️',boat:'⛴️',buffalo:'🐃',house:'🏠',bike:'🚲',market:'🛒',mountain:'⛰️',sunset:'🌅',cave:'🦇',shop:'🛍️',gadget:'🎧',hotel:'🏨',shisa:'🦁',deck:'🔭',taxi:'🚕',cafe:'☕',izakaya:'🏮',luggage:'🧳',passport:'🛂'};
+const DAYS=[
+{id:1,date:'10/20',wd:'二',sub:'北部絕景自駕',items:[
+ ['08:30','抵達新石垣機場','keep','plane','下機、領行李、辦理入境。','新石垣空港'],
+ ['09:00','租車手續（Nissan）','keep','car','確認保險、ETC、油種與還車流程，檢查車況後出發。預約號碼 247213697。','日産レンタカー 石垣島空港店'],
+ ['10:05','玉取崎展望台','keep','deck','機場出發約 25 分鐘，第一站眺望湛藍海景。','玉取崎展望台'],
+ ['11:25','平久保崎燈台','keep','lighthouse','停車後步行上坡，風大注意帽子。','平久保崎燈台'],
+ ['12:30','北部午餐：明石食堂','note','noodles','八重山麵為主。排隊超過 40 分鐘就改吃別家，保住川平灣時間。','明石食堂 石垣'],
+ ['15:20','川平灣（玻璃底船）','keep','boat','展望台加玻璃底船，末班前至少預留 45 分鐘。','川平湾'],
+ ['17:10','看日落：御神崎／名藏灣','keep','sunset','依天候與體力決定。日落約 18:10，建議提早到。','御神崎'],
+ ['18:30','回住宿辦理入住','keep','hotel','北部往市區約 40–55 分鐘。Hotel Fit In 石垣島。','ホテルフィットイン石垣島'],
+ ['19:30','晚餐：石垣牛燒肉','note','dinner','やまもと、ひとし等石垣牛燒肉，熱門時段要先訂位。','石垣牛 焼肉 やまもと']
+]},
+{id:2,date:'10/21',wd:'三',sub:'竹富島慢旅行',items:[
+ ['08:10','出發至離島碼頭','keep','car','車停離島碼頭周邊收費停車場，至少提前 30 分鐘到。','石垣港離島ターミナル'],
+ ['09:00','高速船前往竹富島','keep','boat','航程約 15–20 分鐘。10 月正式時刻出發前 1–2 週再確認。','石垣港離島ターミナル'],
+ ['09:25','水牛車導覽','keep','buffalo','依預約時間搭乘，港口通常有接駁。','竹富島 水牛車'],
+ ['10:30','紅瓦聚落散步','keep','shisa','西塘御嶽、傳統街道、花牆與風獅爺。','竹富島 集落'],
+ ['12:00','午餐','keep','noodles','八重山麵、島豆腐或咖哩，熱門店早點入座。','竹富島 食事'],
+ ['13:10','租腳踏車巡島','keep','bike','西棧橋 → Kondoi 海灘 → Kaiji 星砂海灘。','カイジ浜'],
+ ['16:50','返回石垣港','note','boat','以 16:50 回程為首選，趕不上改搭 17:50 備用班。','竹富港'],
+ ['17:30','ゆらてぃく市場','swap','market','在地小吃街，晚餐一起解決。Day 4 會逛公設市場，這裡不重複。','ゆらてぃく市場'],
+ ['19:30','逛 Don Quijote','add','shop','先買零食、藥妝，Day 4 就不用擠。','ドン・キホーテ 石垣島店']
+]},
+{id:3,date:'10/22',wd:'四',sub:'小濱島一日遊',items:[
+ ['08:20','出發至離島碼頭','keep','car','同樣把車停在離島碼頭周邊。','石垣港離島ターミナル'],
+ ['09:15','高速船前往小濱島','keep','boat','航程約 25–30 分鐘。','小浜港'],
+ ['09:50','租電動腳踏車／電動機車','keep','bike','島上坡度多，優先選電力輔助車款。','小浜島 レンタサイクル'],
+ ['10:20','大岳展望台','keep','mountain','需爬階梯，可眺望八重山群島。','大岳 小浜島'],
+ ['11:20','Sugar Road','keep','mountain','甘蔗田道路，適合拍照，注意來車。','シュガーロード 小浜島'],
+ ['12:00','小濱島午餐','keep','cafe','島上店家少，先確認營業日或預約。','小浜島 食堂'],
+ ['13:20','細崎聚落／海人公園','keep','beach','看西表島與曼塔地標。','細崎 小浜島'],
+ ['15:30','回港、還車','keep','boat','搭 17:00 船前要提早還車。17:00 為目前可查的末班參考。','小浜港'],
+ ['晚上','雜貨店／小件伴手禮','add','shop','選擇性。不安排新景點，保留體力。','石垣島 雑貨']
+]},
+{id:4,date:'10/23',wd:'五',sub:'市區採買＋還車',items:[
+ ['08:30','早餐、退房、整理行李','keep','luggage','行李可留住宿或放車上遮蔽處。','ホテルフィットイン石垣島'],
+ ['09:00','石垣島鐘乳洞','swap','cave','室內、遇雨也可逛。步行約 30–40 分鐘。','石垣島鍾乳洞'],
+ ['10:20','石垣やいま村','swap','house','傳統琉球建築體驗園，與鐘乳洞位置相近。','石垣やいま村'],
+ ['11:20','市區午餐','keep','noodles','八重山麵、石垣牛漢堡或島料理。','石垣市 八重山そば'],
+ ['12:30','Euglena Mall＋公設市場','add','market','伴手禮重點：黑糖、ちんすこう、ミンサー織小物、明信片。','石垣市公設市場'],
+ ['14:45','Yamada Denki 看 3C','add','gadget','控制在 40–60 分鐘，可順逛 San-A 超市。免稅品與行動電源全部隨身帶。','ヤマダ電機 石垣'],
+ ['16:20','加油＋前往租車公司','note','car','還車時間不能壓縮，目標 17:15 前到。','日産レンタカー 石垣島空港店'],
+ ['18:00','還車、返回住宿','keep','taxi','接駁到機場後轉巴士；行李多就直接搭計程車。','石垣空港'],
+ ['19:00','最後一晚晚餐','keep','izakaya','以住宿附近為主，不再跨區移動。','石垣市 居酒屋']
+]},
+{id:5,date:'10/24',wd:'六',sub:'返程日',items:[
+ ['06:10','起床與最後確認','keep','luggage','護照、手機、錢包、行李秤重。','ホテルフィットイン石垣島'],
+ ['06:50','大廳等車','keep','taxi','計程車前一晚預約。市區到機場約 25–30 分鐘。','石垣島 タクシー'],
+ ['07:30','抵達新石垣機場','keep','plane','距起飛約 90 分鐘。','新石垣空港'],
+ ['07:30','報到、安檢','note','passport','免稅品保持密封到安檢後。行動電源、無線離子夾隨身帶並關閉電源。','新石垣空港'],
+ ['09:25','班機離開石垣島','note','plane','虎航 IT 737。手冊「班機資訊」寫 09:25，Day 5 時間表寫 09:00，以機票為準。','新石垣空港']
+]}];
+const MOVE={'d1-2':'🚗 約 25 分','d1-3':'🚗 約 30 分','d1-4':'🚗 約 20 分','d1-5':'🚗 約 35 分','d1-6':'🚗 約 15 分','d1-7':'🚗 約 40–55 分',
+'d2-1':'🚗 10–20 分（含停車、換票）','d2-2':'⛴️ 約 15–20 分','d2-3':'🚶 約 5 分','d2-4':'🚶 約 5–10 分','d2-5':'🚲 巡島約 2.5 小時','d2-6':'🚲 約 15 分（含還車）','d2-7':'⛴️ 約 15–20 分','d2-8':'🚶 約 5–10 分',
+'d3-1':'🚗 10–20 分（含停車）','d3-2':'⛴️ 約 25–30 分','d3-3':'🛵 約 10 分','d3-4':'🛵 約 5–10 分','d3-5':'🛵 約 5–10 分','d3-6':'🛵 約 15 分','d3-7':'🛵 約 20 分','d3-8':'⛴️ 搭 17:00 船',
+'d4-1':'🚗 約 15–20 分','d4-2':'🚗 約 5 分','d4-3':'🚗 約 15–20 分','d4-4':'🚗 約 5–10 分','d4-5':'🚗 約 5–10 分','d4-6':'🚗 約 20–25 分','d4-7':'🚕 約 25–30 分','d4-8':'🚶 住宿附近',
+'d5-2':'🚕 約 25–30 分'};
+const TAGS={swap:'換',add:'加',note:'提醒'};
+// 純移動、手續類的站不放圖，改放實用建議
+const SUGG={
+'d1-0':['入境前先在 Visit Japan Web 填好資料，排隊時直接出示 QR Code。','三個人分工：一人辦租車、一人顧行李、一人買水。'],
+'d1-1':['開車前繞車一圈拍照，刮痕、凹痕都留紀錄。','問清楚油種（多半是「レギュラー」）和還車要不要加滿。','導航輸入景點電話號碼或 MAPCODE 最準。'],
+'d1-7':['先確認飯店停車場位置和費用。','晚餐 19:30，放完行李還有時間沖個澡。'],
+'d2-0':['先在碼頭售票口買來回船票，回程班次當場確認。','問問看有沒有含水牛車的套票。'],
+'d3-0':['小濱島航程比竹富島長，容易暈船的人上船前 30 分鐘吃藥。','坐船的中後段比較不晃。'],
+'d3-8':['今天騎車爬坡比較累，挑住宿附近的店就好。','伴手禮重點留到 Day 4 公設市場一次買。'],
+'d4-0':['退房前檢查充電線、插頭、浴室小東西。','行李放車上要蓋起來，不要讓外面看到。'],
+'d4-6':['日本加油站多半自助，「満タン」就是加滿。','加油收據留著，還車時可能要看。'],
+'d4-7':['行李多就直接叫計程車回市區，比接駁轉巴士省事。','還車前把車上垃圾、充電線清乾淨。'],
+'d5-0':['護照、手機、錢包三樣放同一個口袋。','行動電源放隨身包，不要塞進大行李。'],
+'d5-2':['沒托運行李，報到完就可以直接去安檢。'],
+'d5-3':['免稅品袋不要拆，過安檢後再打開。','液體超過 100ml 帶不上去，沒托運就只能丟掉。'],
+'d5-4':['登機前最後一次買黑糖、ちんすこう，機場商店有賣。']};
+// 二選一：點一下，選中的放大
+const CHOICE={
+'d1-4':{q:'排隊超過 40 分鐘怎麼辦？',opts:[
+  {n:'留下吃',e:'🍜',art:'noodles',ph:'soba',d:'明石食堂的八重山麵是北部名店，排得到就值得。',q:'明石食堂 石垣'},
+  {n:'換一家',e:'🚗',art:'cafe',d:'往川平灣方向邊開邊找，或先到便利商店墊肚子，保住下午的川平灣。',q:'川平 ランチ'}]},
+'d1-6':{q:'今天的日落要在哪裡看？',opts:[
+  {n:'御神崎',e:'🌅',art:'lighthouse',d:'斷崖加白色燈塔，經典日落機位。風大，帶薄外套。',q:'御神崎'},
+  {n:'名藏灣',e:'🏖️',art:'beach',ph:'nagura',d:'開闊海灣，離市區較近，看完回飯店比較輕鬆。',q:'名蔵湾'}]},
+'d2-6':{q:'搭哪一班船回石垣？',opts:[
+  {n:'16:50',e:'⛴️',art:'boat',d:'首選。回市區還有時間逛ゆらてぃく市場、吃晚餐。',q:'竹富港'},
+  {n:'17:50',e:'🌇',art:'sunset',d:'備用班。在竹富島多待一小時，但晚上的市場時間會變短。',q:'竹富港'}]},
+'d3-2':{q:'要騎哪一種？',opts:[
+  {n:'腳踏車',e:'🚲',art:'bike',d:'電動輔助腳踏車，安靜好騎，上坡也有助力。',q:'小浜島 レンタサイクル'},
+  {n:'機車',e:'🛵',art:'mountain',d:'電動機車爬坡更輕鬆，移動更快。要帶台灣駕照和日文譯本。',q:'小浜島 レンタバイク'}]},
+'d5-1':{q:'怎麼去機場？',opts:[
+  {n:'計程車',e:'🚕',art:'taxi',d:'主方案。前一晚請飯店櫃台預約，三個人分攤不貴。',q:'石垣島 タクシー'},
+  {n:'公車',e:'🚌',art:'car',d:'比較便宜，但只有確認清晨班次趕得上才選。',q:'石垣空港 バス'}]}};
+let choice={};
+function pickLabel(k){const c=CHOICE[k],s=choice[k];return s==null?'二選一':'→ '+c.opts[s].n}
+function pickDetail(k){
+  const s=choice[k];if(s==null)return '<p class="phint">點一下做決定，選中的會放大。</p>';
+  const o=CHOICE[k].opts[s], m='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(o.q), p='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(o.q);
+  return `<div class="pdet"><p><b>${o.e} ${o.n}</b>：${o.d}${o.ph?`<br><small class="muted">照片 © ${PH[o.ph][1]}・${PH[o.ph][2]}</small>`:''}</p><div class="acts"><a class="btn" href="${m}" target="_blank" rel="noopener">Google Maps</a><a class="btn" href="${p}" target="_blank" rel="noopener">看實景照片</a><button class="btn ghost" type="button" data-unpick="${k}">重新選</button></div></div>`;
+}
+function choiceHTML(k){
+  const c=CHOICE[k], s=choice[k];
+  return `<div class="pick"><p class="pq">${c.q}</p><div class="tiles">${c.opts.map((o,j)=>`<button type="button" class="tile${s===j?' on':''}${s!=null&&s!==j?' off':''}" data-pick="${k}" data-j="${j}" aria-pressed="${s===j}"><span class="tart">${o.ph?phImg(o.ph):ART[o.art]()}</span><span class="tlab"><span class="te" aria-hidden="true">${o.e}</span>${o.n}</span></button>`).join('')}</div><div id="pd-${k}">${pickDetail(k)}</div></div>`;
+}
+function setPick(k,j){
+  if(j==null)delete choice[k];else choice[k]=j;store.set('ishigaki-choice',choice);
+  document.querySelectorAll(`[data-pick="${k}"]`).forEach(t=>{const n=+t.dataset.j;t.classList.toggle('on',j===n);t.classList.toggle('off',j!=null&&j!==n);t.setAttribute('aria-pressed',j===n)});
+  $('pd-'+k).innerHTML=pickDetail(k);$('pl-'+k).textContent=pickLabel(k);
+}
+const PHRASES=[['これをください','ko-re-o ku-da-sai','我要這個'],['二人です／三人です','fu-ta-ri / san-nin de-su','兩位／三位'],['おすすめは何ですか？','o-su-su-me wa nan de-su-ka','推薦什麼？'],['お会計お願いします','o-kai-kei o-ne-gai-shi-masu','麻煩結帳'],['免税できますか？','men-zei de-ki-masu-ka','可以免稅嗎？']];
+const WX=[['☀️','晴時多雲','10/20 北部自駕',28,23],['⛅','多雲有陣雨','10/21 竹富島',28,23],['🌤️','晴時多雲','10/22 小濱島',27,23],['🌦️','午後陣雨','10/23 市區（有室內備案）',27,22],['☁️','多雲','10/24 返程',27,22]];
+const PACK=['防曬乳（SPF50）','帽子、太陽眼鏡','輕便雨衣／折傘','薄外套（船上、晚上）','防滑水鞋','暈船藥','行動電源（隨身）','防水手機袋'];
+
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let done=store.get('ishigaki-done',{}), packed=store.get('ishigaki-pack',{});
+let day=store.get('ishigaki-day',1), tab='plan';
+choice=store.get('ishigaki-choice',{});
+const photos={};
+DAYS.forEach(d=>d.items.forEach((_,i)=>{const k=`d${d.id}-${i}`;try{const v=localStorage.getItem('ishigaki-photo-'+k);if(v)photos[k]=v}catch(e){}}));
+// 維基共享資源公開授權照片（已縮小並裁切顯示）
+const LIC={'CC BY 2.0':'by/2.0','CC BY 2.5':'by/2.5','CC BY 4.0':'by/4.0','CC BY-SA 2.0':'by-sa/2.0','CC BY-SA 2.1 JP':'by-sa/2.1/jp','CC BY-SA 3.0':'by-sa/3.0','CC BY-SA 4.0':'by-sa/4.0'};
+const PH={
+tamatori:['玉取崎展望台','Kzaral','CC BY 2.0','Cape_Tamatori,_Ishigaki.jpg'],
+hirakubo:['平久保崎燈台','miyuki from Japan','CC BY-SA 2.1 JP','Hirakubozaki,_Ishigakijima_01.jpg'],
+kabira:['川平灣','663highland','CC BY 2.5','Kabira_Bay_Ishigaki_Island40bs3s4592.jpg'],
+nagura:['名藏灣的日落','石垣市','CC BY 4.0','Okinawa_Nagura_Bay.jpg'],
+buffalo:['竹富島水牛車','Ken FUNAKOSHI','CC BY-SA 2.0','Water_buffalo_taxi.jpg'],
+village:['竹富島紅瓦聚落','Minamie\'s Photo','CC BY 2.0','Taketomi,_Japan_(2310448093).jpg'],
+kaiji:['往 Kaiji 海灘的小路','kanegen','CC BY 2.0','Kaiji_beach(Taketomi).jpg'],
+ufudaki:['小濱島大岳','Torbenbrinker','CC BY-SA 3.0','KohamaMountain.jpg'],
+cave:['石垣島鐘乳洞','Raita Futo','CC BY 2.0','Ishigaki_Stalactite_Cave_(52117117523).jpg'],
+yaima:['石垣やいま村 舊牧志家','Paipateroma','CC BY-SA 4.0','Ishigaki_yaimamura_makishi_house.jpg'],
+market:['石垣市公設市場','Paipateroma','CC BY-SA 3.0','Ishigaki_kosetsu_ichiba.jpg'],
+soba:['八重山麵','Muyo','CC BY-SA 4.0','Yaeyama_soba02.jpg']};
+const PHOTO_AT={'d1-2':'tamatori','d1-3':'hirakubo','d1-5':'kabira','d2-2':'buffalo','d2-3':'village','d2-4':'soba','d2-5':'kaiji','d3-3':'ufudaki','d4-1':'cave','d4-2':'yaima','d4-3':'soba','d4-4':'market'};
+const phImg=id=>`<img src="img/${id}.jpg" alt="${PH[id][0]}" loading="lazy">`;
+function artHTML(k,type){
+  if(photos[k])return `<img alt="我拍的照片" src="${photos[k]}"><span class="badge">我的照片</span>`;
+  const id=PHOTO_AT[k];
+  if(id)return phImg(id)+`<span class="credit">© ${PH[id][1]}・${PH[id][2]}</span>`;
+  return (ART[type]?ART[type]():'')+'<span class="badge">示意插畫</span>';
+}
+const S=(inner,bg)=>`<svg viewBox="0 0 160 90" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="160" height="90" fill="${bg}"/>${inner}</svg>`;
+const sea='<rect y="58" width="160" height="32" fill="#1f93b5"/><path d="M0 66q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0" stroke="#bfeaf5" fill="none" stroke-width="1.5"/>';
+const cloud=(x,y)=>`<ellipse cx="${x}" cy="${y}" rx="14" ry="5" fill="#fff"/><ellipse cx="${x+8}" cy="${y-3}" rx="9" ry="5" fill="#fff"/>`;
+const ART={
+plane:()=>S(cloud(30,22)+cloud(120,60)+'<g transform="rotate(-12 80 45)"><rect x="40" y="39" width="82" height="13" rx="6.5" fill="#fff"/><path d="M72 46L56 72h11l24-26z" fill="#d7dee5"/><path d="M72 46L56 20h11l24 26z" fill="#d7dee5"/><path d="M45 41l-8-13h8l9 13z" fill="#E58FA5"/><circle cx="112" cy="45" r="2.2" fill="#2F5D8C"/><circle cx="104" cy="45" r="2.2" fill="#2F5D8C"/></g>','#a9dcf0'),
+car:()=>S(cloud(36,20)+cloud(124,28)+'<rect y="62" width="160" height="28" fill="#4b5563"/><path d="M0 76h160" stroke="#fff" stroke-dasharray="10 8" stroke-width="2"/><rect x="42" y="44" width="76" height="22" rx="7" fill="#4fa3d1"/><path d="M58 44l8-14h30l10 14z" fill="#7cc0e6"/><path d="M69 42l5-9h10v9zM88 42v-9h8l5 9z" fill="#e8f6fc"/><circle cx="62" cy="67" r="8" fill="#1f2937"/><circle cx="100" cy="67" r="8" fill="#1f2937"/><circle cx="62" cy="67" r="3" fill="#9ca3af"/><circle cx="100" cy="67" r="3" fill="#9ca3af"/>','#bfe6f4'),
+lighthouse:()=>S('<circle cx="130" cy="20" r="9" fill="#fde68a"/>'+sea+'<ellipse cx="80" cy="76" rx="52" ry="12" fill="#5fa85f"/><path d="M71 72L76 32h8l5 40z" fill="#fff"/><path d="M73.4 56h13.2l.8 8H72.6z" fill="#d9362b"/><rect x="73" y="26" width="14" height="6" fill="#374151"/><path d="M72 26l8-9 8 9z" fill="#d9362b"/><rect x="77" y="38" width="6" height="8" rx="3" fill="#7cc0e6"/>','#b9e3f3'),
+noodles:()=>S('<path d="M52 24c-4 8 4 8 0 16M72 20c-4 8 4 8 0 16M92 24c-4 8 4 8 0 16" stroke="#9fb4bc" stroke-width="2" fill="none"/><path d="M34 44h92a46 36 0 0 1-92 0z" fill="#fff" stroke="#2F5D8C" stroke-width="3"/><path d="M40 46h80" stroke="#f3d9a6" stroke-width="6"/><path d="M48 46q8-5 16 0t16 0 16 0" stroke="#e7c27b" stroke-width="2" fill="none"/><rect x="60" y="40" width="26" height="10" rx="3" fill="#e9a8a0"/><circle cx="104" cy="44" r="6" fill="#f6e6a3"/><circle cx="104" cy="44" r="2.5" fill="#f4a52b"/><path d="M50 82h60" stroke="#2F5D8C" stroke-width="3"/>','#e3f1ef'),
+dinner:()=>S('<ellipse cx="80" cy="50" rx="56" ry="30" fill="#fff" stroke="#2F5D8C" stroke-width="3"/><ellipse cx="80" cy="50" rx="42" ry="21" fill="#f1f5f6"/><rect x="52" y="40" width="22" height="12" rx="4" fill="#8a3b2f"/><rect x="76" y="38" width="22" height="12" rx="4" fill="#a14a3a"/><rect x="66" y="52" width="22" height="11" rx="4" fill="#7c3228"/><circle cx="108" cy="52" r="5" fill="#6aa84f"/><rect x="132" y="30" width="3" height="40" fill="#9ca3af"/><rect x="25" y="30" width="3" height="40" fill="#9ca3af"/>','#e7ecf3'),
+beach:()=>S('<circle cx="124" cy="22" r="10" fill="#fde68a"/>'+cloud(40,22)+'<rect y="48" width="160" height="22" fill="#2aa7c9"/><path d="M0 70q40-14 80-6t80-4v30H0z" fill="#f2deb2"/><path d="M0 56q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0" stroke="#d6f4fb" fill="none" stroke-width="1.5"/><path d="M30 80c4-4 8-4 12 0" stroke="#d9b87a" fill="none" stroke-width="2"/>','#b9e3f3'),
+boat:()=>S('<circle cx="132" cy="20" r="9" fill="#fde68a"/>'+cloud(34,24)+'<rect y="48" width="160" height="42" fill="#27a4c7"/><path d="M60 52h56l-8 16H68z" fill="#fff"/><path d="M68 52v-10h34l6 10z" fill="#e8f6fc"/><rect x="74" y="44" width="8" height="6" fill="#7cc0e6"/><rect x="86" y="44" width="8" height="6" fill="#7cc0e6"/><path d="M70 62h38l-3 6H72z" fill="#7cc0e6"/><path d="M52 72q8-5 16 0t16 0 16 0 16 0 16 0" stroke="#d6f4fb" fill="none" stroke-width="2"/><path d="M0 60q10-4 20 0t20 0M110 80q10-4 20 0t20 0" stroke="#bfeaf5" fill="none" stroke-width="1.5"/>','#b9e3f3'),
+buffalo:()=>S('<rect y="66" width="160" height="24" fill="#b9d98f"/><path d="M80 66h70" stroke="#a89a7c" stroke-width="3"/><rect x="92" y="38" width="48" height="22" fill="#e6c98c" stroke="#8a6d3b" stroke-width="2"/><path d="M88 38h56l-4-10H92z" fill="#caa564"/><circle cx="104" cy="68" r="8" fill="none" stroke="#6b4f2a" stroke-width="3"/><circle cx="132" cy="68" r="8" fill="none" stroke="#6b4f2a" stroke-width="3"/><ellipse cx="52" cy="50" rx="26" ry="16" fill="#4b5563"/><ellipse cx="26" cy="46" rx="11" ry="9" fill="#374151"/><path d="M20 38q-9-4-8-12M32 38q9-4 8-12" stroke="#d9d4c3" stroke-width="3" fill="none"/><rect x="34" y="60" width="6" height="14" fill="#374151"/><rect x="62" y="60" width="6" height="14" fill="#374151"/><circle cx="23" cy="45" r="1.6" fill="#fff"/>','#cfeaf5'),
+house:()=>S(cloud(30,20)+'<rect y="70" width="160" height="20" fill="#9fcf7a"/><rect x="30" y="46" width="100" height="26" fill="#f4e7c8"/><path d="M18 48L50 24h60l32 24z" fill="#c8553d"/><path d="M26 46L52 28M134 46L108 28" stroke="#9b3f2c" stroke-width="2"/><rect x="62" y="52" width="36" height="20" fill="#7a5a36"/><path d="M0 76h160" stroke="#8b8f98" stroke-width="10" stroke-dasharray="14 3"/><circle cx="20" cy="70" r="5" fill="#f05a5a"/><circle cx="142" cy="70" r="5" fill="#f05a5a"/>','#bfe6f4'),
+bike:()=>S('<rect y="70" width="160" height="20" fill="#d9c48f"/><rect y="52" width="160" height="18" fill="#2aa7c9"/><circle cx="52" cy="62" r="17" fill="none" stroke="#1f2937" stroke-width="3"/><circle cx="108" cy="62" r="17" fill="none" stroke="#1f2937" stroke-width="3"/><path d="M52 62l20-24h26l10 24M72 38l14 24H52M98 38l-4-8h-8M72 38l-4-6h-8" fill="none" stroke="#2F5D8C" stroke-width="3" stroke-linecap="round"/><rect x="112" y="40" width="14" height="10" rx="2" fill="#e7a63c"/>','#cdeaf4'),
+market:()=>S('<rect y="70" width="160" height="20" fill="#cbb98e"/><path d="M20 30h120l-8 16H28z" fill="#e8574f"/><path d="M36 30l-4 16M52 30l-2 16M68 30v16M84 30v16M100 30l2 16M116 30l4 16M132 30l4 16" stroke="#fff" stroke-width="5"/><rect x="28" y="46" width="104" height="26" fill="#8a6d3b"/><circle cx="48" cy="44" r="3" fill="#f5a623"/><circle cx="80" cy="44" r="3" fill="#f5a623"/><circle cx="112" cy="44" r="3" fill="#f5a623"/><rect x="40" y="52" width="14" height="10" rx="2" fill="#f4c542"/><rect x="62" y="52" width="14" height="10" rx="2" fill="#8d5cc4"/><rect x="84" y="52" width="14" height="10" rx="2" fill="#6aa84f"/><rect x="106" y="52" width="14" height="10" rx="2" fill="#e8574f"/>','#e0f0f4'),
+mountain:()=>S('<circle cx="124" cy="20" r="9" fill="#fde68a"/><path d="M0 62L38 28l30 26 34-30 58 40v26H0z" fill="#6aa84f"/><path d="M0 76q40-12 80-6t80-4v24H0z" fill="#8cc152"/><path d="M20 90L60 70M50 90L86 70M80 90L112 70M110 90L138 70" stroke="#5e9a3b" stroke-width="3"/>','#bfe6f4'),
+sunset:()=>S('<rect y="30" width="160" height="22" fill="#f7a97c"/><circle cx="80" cy="52" r="20" fill="#fde68a"/><rect y="52" width="160" height="38" fill="#c9625c"/><path d="M60 58h40M54 66h52M62 74h36" stroke="#fde68a" stroke-width="2.5" opacity=".8"/><path d="M0 52q30-8 60 0t50 0 50-2v8H0z" fill="#a14a54"/>','#fbd5b0'),
+cave:()=>S('<path d="M0 90V30q80-50 160 0v60z" fill="#111827"/><path d="M20 90V42q60-40 120 0v48z" fill="#374151"/><path d="M44 38l4 18 4-18M70 28l5 26 5-26M100 30l4 20 4-20M120 40l3 14 3-14" fill="#9aa5b1"/><path d="M60 90V70q20-14 40 0v20z" fill="#2F5D8C" opacity=".7"/>','#111827'),
+shop:()=>S('<path d="M52 36h56l8 44H44z" fill="#f4c542"/><path d="M66 36v-6a14 14 0 0 1 28 0v6" stroke="#8a6d3b" stroke-width="4" fill="none"/><circle cx="80" cy="58" r="9" fill="#e8574f"/><path d="M76 58h8M80 54v8" stroke="#fff" stroke-width="2.5"/><circle cx="132" cy="68" r="8" fill="#f5a623"/><circle cx="30" cy="30" r="5" fill="#E58FA5"/>','#e3f1f4'),
+gadget:()=>S('<path d="M44 58V46a36 36 0 0 1 72 0v12" stroke="#334155" stroke-width="7" fill="none"/><rect x="36" y="52" width="18" height="26" rx="8" fill="#2F5D8C"/><rect x="106" y="52" width="18" height="26" rx="8" fill="#2F5D8C"/><rect x="62" y="64" width="36" height="20" rx="8" fill="#8a97a3"/><circle cx="80" cy="74" r="4" fill="#fff"/>','#e2edf2'),
+hotel:()=>S('<circle cx="132" cy="18" r="8" fill="#fde68a"/><rect x="42" y="26" width="64" height="52" fill="#f1e8d4"/><path d="M42 26h64l-6-8H48z" fill="#c8553d"/><path d="M52 38h10v8H52zM70 38h10v8H70zM88 38h10v8H88zM52 56h10v8H52zM88 56h10v8H88z" fill="#7cc0e6"/><rect x="70" y="56" width="10" height="22" fill="#7a5a36"/><rect y="78" width="160" height="12" fill="#8cc152"/><path d="M126 78V52" stroke="#7a5a36" stroke-width="3"/><path d="M126 52q-14-4-20 4M126 52q14-4 20 4M126 52q-6-12-16-10M126 52q6-12 16-10" stroke="#3f8f4a" stroke-width="3" fill="none"/>','#c7e9f4'),
+shisa:()=>S('<rect y="66" width="160" height="24" fill="#9fcf7a"/><rect x="14" y="48" width="132" height="18" fill="#9a9a96"/><path d="M14 57h132M44 48v18M80 48v18M116 48v18" stroke="#6f6f6b" stroke-width="2"/><circle cx="80" cy="34" r="25" fill="#e9a23b"/><circle cx="80" cy="37" r="16" fill="#f4c46b"/><circle cx="73" cy="33" r="3.4" fill="#fff"/><circle cx="87" cy="33" r="3.4" fill="#fff"/><circle cx="73" cy="33" r="1.5" fill="#222"/><circle cx="87" cy="33" r="1.5" fill="#222"/><path d="M72 44q8 7 16 0" stroke="#b4451f" stroke-width="2.5" fill="none"/><path d="M76 39h8" stroke="#b4451f" stroke-width="2"/><circle cx="22" cy="46" r="5" fill="#f05a5a"/><circle cx="140" cy="46" r="5" fill="#f05a5a"/>','#bfe6f4'),
+deck:()=>S('<circle cx="128" cy="18" r="8" fill="#fde68a"/><rect y="36" width="160" height="30" fill="#1f93b5"/><ellipse cx="112" cy="36" rx="26" ry="6" fill="#5fa85f"/><path d="M0 44q10-4 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0" stroke="#bfeaf5" fill="none" stroke-width="1.5"/><rect y="66" width="160" height="24" fill="#8b6b45"/><rect y="52" width="160" height="4" fill="#d2b283"/><path d="M16 52v14M48 52v14M80 52v14M112 52v14M144 52v14" stroke="#d2b283" stroke-width="4"/><rect x="70" y="40" width="22" height="12" rx="3" fill="#334155"/><circle cx="76" cy="46" r="3" fill="#7cc0e6"/><circle cx="86" cy="46" r="3" fill="#7cc0e6"/>','#b9e3f3'),
+taxi:()=>S('<rect y="62" width="160" height="28" fill="#4b5563"/><path d="M0 76h160" stroke="#fff" stroke-dasharray="10 8" stroke-width="2"/><rect x="42" y="44" width="76" height="22" rx="7" fill="#f7c531"/><path d="M58 44l8-14h30l10 14z" fill="#fad65c"/><path d="M69 42l5-9h10v9zM88 42v-9h8l5 9z" fill="#fff6d6"/><rect x="71" y="24" width="18" height="6" rx="2" fill="#fff" stroke="#334155"/><circle cx="62" cy="67" r="8" fill="#1f2937"/><circle cx="100" cy="67" r="8" fill="#1f2937"/><circle cx="62" cy="67" r="3" fill="#9ca3af"/><circle cx="100" cy="67" r="3" fill="#9ca3af"/>','#d9ecf5'),
+cafe:()=>S('<rect x="18" y="12" width="124" height="44" fill="#9fd4e6" stroke="#8b6b45" stroke-width="4"/><rect x="18" y="38" width="124" height="18" fill="#27a4c7"/><path d="M80 12v44" stroke="#8b6b45" stroke-width="3"/><rect y="66" width="160" height="24" fill="#a47c52"/><path d="M62 56h34l-4 20H66z" fill="#fff" stroke="#2F5D8C" stroke-width="2"/><path d="M96 60q10 0 8 8t-10 6" stroke="#2F5D8C" stroke-width="2.5" fill="none"/><path d="M72 52q-4-6 0-10M82 52q-4-6 0-10" stroke="#fff" stroke-width="2" fill="none"/>','#e8f1ef'),
+izakaya:()=>S('<path d="M20 14h120" stroke="#8b6b45" stroke-width="4"/><ellipse cx="40" cy="30" rx="12" ry="15" fill="#e03a3a"/><path d="M40 15v-1M40 45v5" stroke="#f5c542" stroke-width="3"/><ellipse cx="120" cy="30" rx="12" ry="15" fill="#e03a3a"/><rect y="70" width="160" height="20" fill="#6b4a2b"/><rect x="64" y="42" width="28" height="32" rx="4" fill="#f4c542"/><path d="M62 42q6-10 16-6 8-6 16 4v4H62z" fill="#fff"/><path d="M92 48q12 0 10 10t-10 8" stroke="#f4c542" stroke-width="4" fill="none"/>','#2b2a3a'),
+luggage:()=>S('<rect y="72" width="160" height="18" fill="#c9b98c"/><path d="M64 28v-8h26v8" stroke="#334155" stroke-width="4" fill="none"/><rect x="46" y="28" width="62" height="44" rx="7" fill="#2F5D8C"/><path d="M62 28v44M92 28v44" stroke="#1E3F63" stroke-width="3"/><circle cx="58" cy="74" r="4" fill="#1f2937"/><circle cx="96" cy="74" r="4" fill="#1f2937"/><rect x="112" y="46" width="30" height="26" rx="5" fill="#f4a52b"/><path d="M120 46v-6h14v6" stroke="#8a5a14" stroke-width="3" fill="none"/>','#e3f1f4'),
+passport:()=>S('<rect x="96" y="22" width="44" height="54" rx="4" fill="#f4f1e4" stroke="#9aa5b1" transform="rotate(10 118 49)"/><path d="M104 40h26M104 48h26M104 56h18" stroke="#9aa5b1" stroke-width="2" transform="rotate(10 118 49)"/><rect x="38" y="10" width="56" height="70" rx="5" fill="#1e3a8a"/><circle cx="66" cy="38" r="14" fill="none" stroke="#f5c542" stroke-width="2.5"/><path d="M58 40l16-8-3 8 3 8z" fill="#f5c542"/><path d="M52 64h28" stroke="#f5c542" stroke-width="3"/>','#e2edf2')
+};
+
+function renderDays(){
+  $('days').innerHTML=DAYS.map(d=>`<button role="tab" data-day="${d.id}" aria-selected="${d.id===day}"><b>Day ${d.id}</b><small>${d.date}</small></button>`).join('');
+}
+function renderPlan(){
+  const d=DAYS.find(x=>x.id===day)||DAYS[0];
+  $('dtitle').textContent=`Day ${d.id}・${d.sub}`;
+  $('dsub').textContent=`${d.date}（${d.wd}）・日落約 18:10`;
+  $('list').innerHTML=d.items.map((it,i)=>{
+    const k=`d${d.id}-${i}`, map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(it[5]);
+    const pics='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(it[5]);
+    return `<li class="stop">
+      ${MOVE[k]?`<div class="move">${MOVE[k]}</div>`:''}
+      <span class="time">${it[0]}</span>
+      <div class="scard${done[k]?' done':''}">
+        <div class="srow">
+          <label class="chk"><input type="checkbox" id="c-${k}" data-k="${k}" aria-label="完成：${it[1]}" ${done[k]?'checked':''}><span>✓</span></label>
+          <button class="shead" type="button" aria-expanded="false" aria-controls="b-${k}">
+            <span class="emo" aria-hidden="true">${EMO[it[3]]}</span>
+            <span class="sname">${TAGS[it[2]]?`<span class="tag ${it[2]}">${TAGS[it[2]]}</span>`:''}${CHOICE[k]?`<span class="tag pick" id="pl-${k}">${pickLabel(k)}</span>`:''}${TAGS[it[2]]||CHOICE[k]?'<br>':''}${it[1]}</span>
+            <span class="chev" aria-hidden="true">▼</span>
+          </button>
+        </div>
+        <div class="sbody" id="b-${k}">
+          ${CHOICE[k]?'':SUGG[k]?`<div class="sugg"><b>小建議</b><ul>${SUGG[k].map(s=>`<li>${s}</li>`).join('')}</ul></div>`:`<div class="art" id="art-${k}">${artHTML(k,it[3])}</div>`}
+          <p>${it[4]}</p>
+          ${CHOICE[k]?choiceHTML(k):`<div class="acts">
+            <a class="btn" href="${map}" target="_blank" rel="noopener">Google Maps</a>
+            ${SUGG[k]?'':`<a class="btn" href="${pics}" target="_blank" rel="noopener">看實景照片</a>
+            <label class="btn">放我的照片<input type="file" id="f-${k}" accept="image/*" data-photo="${k}"></label>
+            <button class="btn ghost" type="button" data-rm="${k}" ${photos[k]?'':'hidden'}>移除我的照片</button>`}
+          </div>`}
+          <p class="pmsg" id="m-${k}" hidden></p>
+        </div>
+      </div></li>`;
+  }).join('');
+  progress();
+}
+function progress(){
+  const d=DAYS.find(x=>x.id===day)||DAYS[0];
+  const n=d.items.filter((_,i)=>done[`d${d.id}-${i}`]).length;
+  $('pbar').style.width=(n/d.items.length*100)+'%';
+  $('ptxt').textContent=`已完成 ${n} / ${d.items.length}`;
+}
+function renderGuide(){
+  $('credits').innerHTML=Object.values(PH).map(p=>`<li>${p[0]}：<a href="https://commons.wikimedia.org/wiki/File:${encodeURI(p[3])}" target="_blank" rel="noopener">${p[1]}</a>，<a href="https://creativecommons.org/licenses/${LIC[p[2]]}/" target="_blank" rel="noopener">${p[2]}</a></li>`).join('');
+  $('phrases').innerHTML=PHRASES.map((p,i)=>`<div class="phrase"><div><span class="jp">${p[0]}</span><span class="rd">${p[1]}・${p[2]}</span></div><button class="copy" type="button" data-copy="${i}">複製</button></div>`).join('');
+}
+function renderWeather(){
+  const lo=20,hi=31;
+  $('wxdays').innerHTML=WX.map(w=>`<div class="wxday"><span class="ic" aria-hidden="true">${w[0]}</span>
+    <div class="tx"><b>${w[2]}</b><div class="small muted">${w[1]}</div>
+    <div class="bar-t" aria-hidden="true"><i style="left:${(w[4]-lo)/(hi-lo)*100}%;right:${100-(w[3]-lo)/(hi-lo)*100}%"></i></div></div>
+    <div class="tmp">${w[3]}°<small>${w[4]}°</small></div></div>`).join('');
+  $('pack').innerHTML=PACK.map((p,i)=>`<label><input type="checkbox" id="p-${i}" data-p="${i}" ${packed[i]?'checked':''}>${p}</label>`).join('');
+}
+function setTab(t){
+  tab=t;
+  document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+  ['plan','guide','weather'].forEach(x=>$('v-'+x).hidden=x!==t);
+  window.scrollTo({top:0});
+}
+$('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTab(b.dataset.tab)});
+$('days').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;day=+b.dataset.day;store.set('ishigaki-day',day);renderDays();renderPlan()});
+$('list').addEventListener('click',e=>{const h=e.target.closest('.shead');if(!h)return;const c=h.closest('.scard');h.setAttribute('aria-expanded',c.classList.toggle('open'))});
+$('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.k)return;if(t.checked)done[t.dataset.k]=true;else delete done[t.dataset.k];store.set('ishigaki-done',done);t.closest('.scard').classList.toggle('done',t.checked);progress()});
+$('list').addEventListener('change',e=>{
+  const t=e.target, k=t.dataset.photo;
+  if(!k||!t.files||!t.files[0])return;
+  const msg=$('m-'+k), url=URL.createObjectURL(t.files[0]), img=new Image();
+  img.onload=()=>{
+    const s=Math.min(1,900/Math.max(img.width,img.height)), c=document.createElement('canvas');
+    c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);
+    const data=c.toDataURL('image/jpeg',.72);
+    photos[k]=data;$('art-'+k).innerHTML=artHTML(k);
+    document.querySelector(`[data-rm="${k}"]`).hidden=false;
+    try{localStorage.setItem('ishigaki-photo-'+k,data);msg.hidden=true}
+    catch(err){msg.textContent='手機空間不夠存這張，關掉頁面後會消失。';msg.hidden=false}
+  };
+  img.onerror=()=>{msg.textContent='這個檔案打不開，請換一張 JPG 或 PNG。';msg.hidden=false};
+  img.src=url;t.value='';
+});
+$('list').addEventListener('click',e=>{
+  const t=e.target.closest('[data-pick]');if(t){const k=t.dataset.pick,j=+t.dataset.j;setPick(k,choice[k]===j?null:j);return}
+  const u=e.target.closest('[data-unpick]');if(u){setPick(u.dataset.unpick,null);return}
+});
+$('list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-rm]');if(!b)return;const k=b.dataset.rm;
+  delete photos[k];try{localStorage.removeItem('ishigaki-photo-'+k)}catch(err){}
+  const d=DAYS.find(x=>x.id===day), it=d.items[+k.split('-')[1]];
+  $('art-'+k).innerHTML=artHTML(k,it[3]);b.hidden=true;$('m-'+k).hidden=true;
+});
+$('reset').addEventListener('click',()=>{done={};store.set('ishigaki-done',done);renderPlan()});
+$('pack').addEventListener('change',e=>{const t=e.target;if(t.dataset.p==null)return;if(t.checked)packed[t.dataset.p]=true;else delete packed[t.dataset.p];store.set('ishigaki-pack',packed)});
+$('phrases').addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy]');if(!b)return;
+  const txt=PHRASES[+b.dataset.copy][0];
+  const ok=()=>{b.textContent='已複製';setTimeout(()=>b.textContent='複製',1500)};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(b.previousElementSibling.querySelector('.jp'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已選取'};
+  try{navigator.clipboard.writeText(txt).then(ok,fallback)}catch(err){fallback()}
+});
+renderDays();renderPlan();renderGuide();renderWeather();
+const h=location.hash.slice(1);if(['plan','guide','weather'].includes(h))setTab(h);
+</script>
+
+</html>
